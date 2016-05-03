@@ -1,0 +1,17 @@
+.shade {
+  position:fixed;
+  z-index:2;
+  width:100%;
+  height:0%;
+  background-color:rgba(color(black), 0.8);
+  opacity:0;
+  transition:opacity 300ms ease, height 0s ease 300ms;
+  @include breakpoint(sm) {
+    z-index:4;
+  }
+  &.active {
+    height:100%;
+    opacity:1;
+    transition:opacity 300ms ease, height 0s ease 0s;
+  }
+}

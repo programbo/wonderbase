@@ -1,0 +1,31 @@
+include mixins/gtm
+
+<!DOCTYPE html>
+<!--[if IE 10]>
+<html lang="en" class="lt-ie11">
+<![endif]-->
+<!--[if gt IE 11]><!-->
+<html lang="en">
+<!--<![endif]-->
+head
+  meta(charset="UTF-8")
+  meta(http-equiv="x-ua-compatible", content="ie=edge")
+  title= title
+  link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+  link(rel="apple-touch-icon", href="/apple-touch-icon.png", type="image/png")
+  link(rel="apple-touch-icon-precomposed", href="/apple-touch-icon-precomposed.png", type="image/png")
+  meta(name="apple-mobile-web-app-title", content=defaultSiteTitle)
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  meta(name="description", content="#{description}")
+  meta(name="keywords", content="#{keywords}")
+  script(src="/modernizr-bundle.js")
+  script(src="/bundle.js")
+  if initialState
+    script.
+      window.INITIAL_STATE = !{JSON.stringify(initialState)};
+  script.
+    try{Typekit.load({ async: true });}catch(e){}
+body
+  +gtm(gtmId)
+  block content
+</html>

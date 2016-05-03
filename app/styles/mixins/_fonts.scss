@@ -1,0 +1,81 @@
+// Loop through $fonts map from settings/config
+// and generate font styling for custom web fonts.
+// e.g. @include font(open-sans, semibold);
+//
+// @param {string} $name Name of font within $font-map
+// @param {string} $weight Mapped value of font weight
+// @param {string} $fonts-map Map list of fonts
+@mixin font($name, $weight:normal, $fonts-map:$fonts) {
+  @if map-has-key($fonts-map, $name) {
+    $font:map-get(map-get($fonts-map, $name), $weight);
+    $font-family:map-get($font, family);
+    $font-weight:map-get($font, weight);
+    $font-style:map-get($font, style);
+    $font-fallback:map-get(map-get($fonts-map, $name), fallback);
+    @if $font-fallback {
+      font-family:$font-family, $font-fallback;
+    }
+    @else {
+      font-family:$font-family;
+    }
+    font-weight:$font-weight;
+    font-style:$font-style;
+  }
+  @else {
+    @error 'Font name is incorrect. Check $fonts-map map and font() @include for errors.';
+  }
+  @content;
+}
+
+// Turns font-size properties in to rem and a px fallback
+//
+// @param {string} $size the pixel unit
+// @param {string} $line-height optional line-height pixel unit
+@mixin font-size($size, $line-height:null) {
+  font-size:$size;
+  font-size:rem-calc($size);
+  @if $line-height != null {
+    line-height:rem-calc($line-height);
+  }
+  @content;
+}
+
+// Fluid font-sizing with a min/max viewport width and font-size
+//
+// Source: http://madebymike.com.au/writing/fluid-type-calc-examples
+//
+// @param {string} $min-vw Minimum viewport size
+// @param {string} $max-vw Maximum viewport size
+// @param {string} $min-font-size Minimum font size to scale from
+// @param {string} $max-font-size Maximum font size to scale to
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $min-vw:map-get($breakpoints, $min-vw);
+  $max-vw:map-get($breakpoints, $max-vw);
+  @if $min-vw == null or $max-vw == null {
+    @error 'Breakpoint does not exist. Please use an existing breakpoint.';
+  }
+  $u1:unit($min-vw);
+  $u2:unit($max-vw);
+  $u3:unit($min-font-size);
+  $u4:unit($max-font-size);
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    @include font-size($min-font-size);
+    @media screen and (min-width: $min-vw) {
+      font-size:calc(#{$min-font-size} + #{strip-units($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+    }
+    @media screen and (min-width: $max-vw) {
+      @include font-size($max-font-size);
+    }
+    @content;
+  }
+  @else {
+    @error 'Detected mixed units. Please use the same units for all parameters.';
+  }
+}
+
+@function font-stack($font-family, $font-weight) {
+  $font:map-get(map-get(map-get($fonts, $font-family), $font-weight), family);
+  $font-fallback:map-get(map-get($fonts, $font-family), fallback);
+  $font-stack:prepend($font-fallback, $font);
+  @return $font-stack;
+}
