@@ -33,9 +33,7 @@ const common = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: [
-      'node_modules',
-      'node_modules/bootstrap-sass/assets/fonts/bootstrap',
-      'node_modules/bootstrap-sass/assets/javascripts'
+      'node_modules'
     ]
   },
   module: {},
@@ -50,7 +48,6 @@ const common = {
     autoprefixer({ browsers: ['last 2 versions'] })
   ],
   sassLoader: {
-    includePaths: [path.resolve(__dirname, './node_modules/bootstrap-sass/assets/stylesheets')],
     precision: 10
   }
 };
