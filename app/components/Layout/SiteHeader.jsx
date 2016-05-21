@@ -2,11 +2,13 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import { Navbar, NavbarHeader, NavbarCollapse, NavbarToggle, NavbarBrand } from '../Navbar';
 
+const logo = typeof window !== 'undefined' ? require('../../images/logo.png') : 'images/logo.png';
+
 const SiteHeader = () => (
   <Navbar className="mainmenu">
     <NavbarHeader>
       <NavbarToggle menuId="mainmenu-links"/>
-      <NavbarBrand logo={'images/logo.png'} menuId="mainmenu-links">
+      <NavbarBrand logo={logo} menuId="mainmenu-links">
         XXX
       </NavbarBrand>
     </NavbarHeader>
