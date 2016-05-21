@@ -36,9 +36,7 @@ const common = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: [
-      'node_modules',
-      'node_modules/bootstrap-sass/assets/fonts/bootstrap',
-      'node_modules/bootstrap-sass/assets/javascripts'
+      'node_modules'
     ]
   },
   module: {},
@@ -136,7 +134,7 @@ if (TARGET.match(/dev$/)) {
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
-          exclude: /node_modules/,
+          exclude: /(apple-touch.*\.png)$/i,
           loaders: ['url', 'image-webpack?bypassOnDebug']
         },
         { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]' },
