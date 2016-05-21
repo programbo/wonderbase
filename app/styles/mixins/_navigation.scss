@@ -3,7 +3,7 @@
 @mixin horizontal-navigation {
   @include navigation;
   .navigation-item {
-    float:left;
+    float: left;
   }
 }
 
@@ -11,10 +11,10 @@
 @mixin navigation {
   ol,
   ul {
-    margin-top:0;
-    margin-bottom:0;
-    padding-left:0;
-    list-style:none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
   }
   @content;
 }
@@ -27,14 +27,14 @@
 @mixin navigation-link-color($color, $hover-color) {
   .navigation-item {
     a {
-      color:$color;
+      color: $color;
       &:hover,
       &:focus {
-        color:$hover-color;
+        color: $hover-color;
       }
     }
     &.navigation-item--current > a {
-      color:$hover-color;
+      color: $hover-color;
     }
   }
 }

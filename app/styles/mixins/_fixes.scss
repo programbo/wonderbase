@@ -2,7 +2,7 @@
 
 // Force a value to a string no matter what
 //
-// Source: http://hugogiraudel.com/2014/01/27/casting-types-in-sass/
+// Source: http: //hugogiraudel.com/2014/01/27/casting-types-in-sass/
 //
 // @param {mixed} $value The value which needs to be converted to a string
 @function force-string($value) {
@@ -14,8 +14,8 @@
 // @param {mixed} $value Any value to be converted to a string.
 @function hyphenated-string($value) {
   @if $value != null {
-    $forced-string:force-string($value);
-    $hyphenated-string:str-insert($forced-string, '-', 1);
+    $forced-string: force-string($value);
+    $hyphenated-string: str-insert($forced-string, '-', 1);
   }
   @else {
     @return null;
@@ -28,14 +28,14 @@
 // @param {list} $list The list you're removing from
 // @param {mixed} $value Value being search for
 // @param {boolean} $recursive Whether to recursively search for the $value
-@function remove($list, $value, $recursive:false) {
-  $result:();
+@function remove($list, $value, $recursive: false) {
+  $result: ();
   @for $i from 1 through length($list) {
     @if type-of(nth($list, $i)) == list and $recursive {
-      $result:append($result, remove(nth($list, $i), $value, $recursive));
+      $result: append($result, remove(nth($list, $i), $value, $recursive));
     }
     @else if nth($list, $i) != $value {
-      $result:append($result, nth($list, $i));
+      $result: append($result, nth($list, $i));
     }
   }
   @return $result;
@@ -46,7 +46,7 @@
 // @param {list} $list The list you're removing from
 // @param {number} $index The index from where you want to remove the item
 @function remove-nth($list, $index) {
-  $result:null;
+  $result: null;
   @if type-of($index) != number {
     @warn '$index: #{quote($index)} is not a number for `remove-nth`.';
   }
@@ -57,11 +57,11 @@
     @warn 'List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.';
   }
   @else {
-    $result:();
-    $index:if($index < 0, length($list) + $index + 1, $index);
+    $result: ();
+    $index: if($index < 0, length($list) + $index + 1, $index);
     @for $i from 1 through length($list) {
       @if $i != $index {
-        $result:append($result, nth($list, $i));
+        $result: append($result, nth($list, $i));
       }
     }
   }
@@ -70,7 +70,7 @@
 
 // Add an item to a list at the given index
 //
-// Source: http://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
+// Source: http: //hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
 //
 // @param {list} $list The list being appended to
 // @param {int} $index The index at which you are appending
@@ -100,26 +100,26 @@
 
 // Returns the opposite direction of each direction in a list
 //
-// Source: https://css-tricks.com/snippets/sass/opposite-direction-function/
+// Source: https: //css-tricks.com/snippets/sass/opposite-direction-function/
 //
 // @author Hugo Giraudel
 // @param {list} $directions - List of initial directions
 // @return {list} - List of opposite directions
 @function opposite-direction($directions) {
-  $opposite-directions:();
+  $opposite-directions: ();
   $direction-map: (
-    'top':'bottom',
-    'right':'left',
-    'bottom':'top',
-    'left':'right',
-    'center':'center',
-    'ltr':'rtl',
-    'rtl':'ltr'
+    'top': 'bottom',
+    'right': 'left',
+    'bottom': 'top',
+    'left': 'right',
+    'center': 'center',
+    'ltr': 'rtl',
+    'rtl': 'ltr'
   );
   @each $direction in $directions {
-    $direction:to-lower-case($direction);
+    $direction: to-lower-case($direction);
     @if map-has-key($direction-map, $direction) {
-      $opposite-directions:append($opposite-directions, unquote(map-get($direction-map, $direction)));
+      $opposite-directions: append($opposite-directions, unquote(map-get($direction-map, $direction)));
     }
     @else {
       @warn 'No opposite direction can be found for `#{$direction}`. Direction omitted.';
@@ -130,7 +130,7 @@
 
 // Prepend a value on to the beginning of a list
 //
-// Source: http://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
+// Source: http: //hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
 //
 // @param {list} $list The list being appended to
 // @param {string} $value Any value being prepended
@@ -140,13 +140,13 @@
 
 // Replace a searched value within a given string
 //
-// Source: http://hugogiraudel.com/2014/01/13/sass-string-replacement-function/
+// Source: http: //hugogiraudel.com/2014/01/13/sass-string-replacement-function/
 //
 // @param {string} $string The string being searched
 // @param {string} $search Search term that is being looked for
 // @param {string} $replace Value that will replace the found search term
-@function str-replace($string, $search, $replace:'') {
-  $index:str-index($string, $search);
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
   @if $index {
     @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
   }
@@ -155,7 +155,7 @@
 
 // Convert a value to a string
 //
-// Source: http://hugogiraudel.com/2014/01/27/casting-types-in-sass/
+// Source: http: //hugogiraudel.com/2014/01/27/casting-types-in-sass/
 //
 // @param {mixed} $value A value that is being converted to string data type
 @function to-string($value) {
@@ -175,12 +175,12 @@
 // floating.
 @mixin clearfix {
   &:after {
-    display:block;
-    visibility:hidden;
-    clear:both;
-    height:0;
-    content:' ';
-    font-size:0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: ' ';
+    font-size: 0;
   }
 }
 
@@ -189,13 +189,13 @@
 // @param {arglist} A list of values used as classes in the selector
 @mixin feature-enhancement($feature...) {
   @if length($feature) > 1 {
-    $feature-list:();
+    $feature-list: ();
     @each $class in $feature {
-      $selector:str-insert($class, '.', 1);
-      $feature-list:append($feature-list, $selector);
+      $selector: str-insert($class, '.', 1);
+      $feature-list: append($feature-list, $selector);
     }
-    $feature-list:to-string($feature-list);
-    $feature-list:str-replace($feature-list, ' ');
+    $feature-list: to-string($feature-list);
+    $feature-list: str-replace($feature-list, ' ');
 
     #{$feature-list} & {
       @content;
@@ -210,29 +210,29 @@
 
 // Fix scroll bar issues for scrolling on mobile devices
 @mixin mobile-scrolling {
-  -webkit-transform:translateZ(0); // force scrollbar render Android Chrome
-  -webkit-overflow-scrolling:touch;
+  -webkit-transform: translateZ(0); // force scrollbar render Android Chrome
+  -webkit-overflow-scrolling: touch;
 }
 
 // Force scrollbars on Mac OS X Webkit browsers
-@mixin visible-scrollbars($bar-color:white, $thumb-color:rgba(black, 0.5)) {
-  overflow:auto;
-  &::-webkit-scrollbar {
-    -webkit-appearance:none;
+@mixin visible-scrollbars($bar-color: white, $thumb-color: rgba(black, 0.5)) {
+  overflow: auto;
+  &:: -webkit-scrollbar {
+    -webkit-appearance: none;
   }
-  &::-webkit-scrollbar:vertical {
-    width:11px;
+  &:: -webkit-scrollbar: vertical {
+    width: 11px;
   }
-  &::-webkit-scrollbar:horizontal {
-    height:11px;
-  }  &::-webkit-scrollbar-thumb {
-    border:2px solid $bar-color;
-    border-radius:8px;
-    background-color:$thumb-color;
+  &:: -webkit-scrollbar: horizontal {
+    height: 11px;
+  }  &:: -webkit-scrollbar-thumb {
+    border: 2px solid $bar-color;
+    border-radius: 8px;
+    background-color: $thumb-color;
   }
-  &::-webkit-scrollbar-track {
-    border-radius:8px;
-    background-color:$bar-color;
+  &:: -webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: $bar-color;
   }
   @content;
 }

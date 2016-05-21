@@ -1,49 +1,49 @@
-@import url('//fonts.googleapis.com/css?family=Oswald:300,700');
-@import url('//fonts.googleapis.com/css?family=Lato:400,300,700,700italic,400italic,300italic');
+@import url('//fonts.googleapis.com/css?family=Oswald: 300,700');
+@import url('//fonts.googleapis.com/css?family=Lato: 400,300,700,700italic,400italic,300italic');
 
-$fonts:(
-  oswald:(
-    light:(
-      family:'Oswald',
-      weight:300
+$fonts: (
+  oswald: (
+    light: (
+      family: 'Oswald',
+      weight: 300
     ),
-    bold:(
-      family:'Oswald',
-      weight:700
+    bold: (
+      family: 'Oswald',
+      weight: 700
     ),
-    fallback:(
+    fallback: (
       'Arial Black', sans-serif
     )
   ),
-  lato:(
-    light:(
-      family:'Lato',
-      weight:300
+  lato: (
+    light: (
+      family: 'Lato',
+      weight: 300
     ),
-    lightitalic:(
-      family:'Lato',
-      weight:300,
-      style:italic
+    lightitalic: (
+      family: 'Lato',
+      weight: 300,
+      style: italic
     ),
-    normal:(
-      family:'Lato',
-      weight:400
+    normal: (
+      family: 'Lato',
+      weight: 400
     ),
-    normalitalic:(
-      family:'Lato',
-      weight:400,
-      style:italic
+    normalitalic: (
+      family: 'Lato',
+      weight: 400,
+      style: italic
     ),
-    bold:(
-      family:'Lato',
-      weight:700
+    bold: (
+      family: 'Lato',
+      weight: 700
     ),
-    bolditalic:(
-      family:'Lato',
-      weight:700,
-      style:italic
+    bolditalic: (
+      family: 'Lato',
+      weight: 700,
+      style: italic
     ),
-    fallback:(
+    fallback: (
       'Arial', sans-serif
     )
   )

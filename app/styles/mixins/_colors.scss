@@ -6,9 +6,9 @@
 // @param {color} $color Color key in map
 // @param {color} $shade Shade key in map
 // @param {map} $color-map A map of colors
-@function color($color, $shade:null, $color-map:$colors) {
+@function color($color, $shade: null, $color-map: $colors) {
   @if map-has-key($color-map, $color) {
-    $map:map-get($color-map, $color);
+    $map: map-get($color-map, $color);
     @if $shade == null {
       @if length($map) >= 1 {
         @return $map;
@@ -37,19 +37,19 @@
 // @param {map} $color-map Define the map which will present the colors
 //
 // See ../settings/colors.scss for default map
-@mixin color-classes($base-class:background, $parameter:background-color, $color-map:$colors) {
+@mixin color-classes($base-class: background, $parameter: background-color, $color-map: $colors) {
   .#{$base-class} {
     @each $key, $val in $color-map {
       @if type-of($val) == map {
         @each $name, $hex in $val {
           &--#{$key}-#{$name} {
-            #{$parameter}:color($key, $name);
+            #{$parameter}: color($key, $name);
           }
         }
       }
       @else {
         &--#{$key} {
-          #{$parameter}:color($key);
+          #{$parameter}: color($key);
         }
       }
     }
