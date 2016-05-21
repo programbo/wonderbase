@@ -13,10 +13,10 @@ import routes from './config/routes';
 import './images/static';
 
 // Load styles
-import './styles/styles.scss';
+// import './styles/styles.scss';
 
 // Load Bootstrap JavaScript modules
-import './utils/bootstrap';
+// import './utils/bootstrap';
 
 const initialState = windowHas('INITIAL_STATE') ? window.INITIAL_STATE : {};
 const devToolsExtension = windowHas('devToolsExtension') ? window.devToolsExtension() : f => f;

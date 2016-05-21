@@ -1,4 +1,4 @@
-// Functions
+@import "../settings/colors";
 
 // Get a hexidecimal color value from a pre-defined map set in
 // settings/config.
@@ -6,9 +6,9 @@
 // @param {color} $color Color key in map
 // @param {color} $shade Shade key in map
 // @param {map} $color-map A map of colors
-@function color($color, $shade: null, $color-map: $colors) {
+@function color($color, $shade:null, $color-map:$colors) {
   @if map-has-key($color-map, $color) {
-    $map: map-get($color-map, $color);
+    $map:map-get($color-map, $color);
     @if $shade == null {
       @if length($map) >= 1 {
         @return $map;
@@ -25,33 +25,5 @@
   @else {
     @error "color #{$color} not found";
     @return false;
-  }
-}
-
-// Mixins
-
-// Generate classes for pairing to a color map of predefined hex values.
-//
-// @param {string} $base-class Set the base for the class selector
-// @param {string} $parameter Set the CSS parameter for the color to be applied to
-// @param {map} $color-map Define the map which will present the colors
-//
-// See ../settings/colors.scss for default map
-@mixin color-classes($base-class: background, $parameter: background-color, $color-map: $colors) {
-  .#{$base-class} {
-    @each $key, $val in $color-map {
-      @if type-of($val) == map {
-        @each $name, $hex in $val {
-          &--#{$key}-#{$name} {
-            #{$parameter}: color($key, $name);
-          }
-        }
-      }
-      @else {
-        &--#{$key} {
-          #{$parameter}: color($key);
-        }
-      }
-    }
   }
 }

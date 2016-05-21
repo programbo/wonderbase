@@ -24,7 +24,10 @@ process.env.BABEL_ENV = TARGET;
 
 // Exports
 const common = {
-  entry: PATHS.app,
+  entry: [
+    'bootstrap-loader',
+    PATHS.app
+  ],
   output: {
     filename: 'bundle.js',
     path: PATHS.build,
@@ -94,7 +97,9 @@ if (TARGET.match(/(start|build)$/)) {
             'url?limit=10000&name=images/[name].[ext]',
             'image-webpack?optimizationLevel=7&interlaced=false'
           ]
-        }
+        },
+        { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]' },
+        { test: /\.(ttf|eot)$/, loader: 'file?name=fonts/[name].[ext]' }
       ]
     }
   });
@@ -103,7 +108,11 @@ if (TARGET.match(/(start|build)$/)) {
 if (TARGET.match(/dev$/)) {
   module.exports = merge.smart(common, {
     devtool: 'eval-source-map',
-    entry: [PATHS.app, 'webpack-hot-middleware/client?reload=true'],
+    entry: [
+      'bootstrap-loader',
+      PATHS.app,
+      'webpack-hot-middleware/client?reload=true'
+    ],
     plugins: [
       new ModernizrWebpackPlugin(MODERNIZR_CONFIG),
       new Clean(['public']),
@@ -129,7 +138,9 @@ if (TARGET.match(/dev$/)) {
           test: /\.(jpe?g|png|gif|svg)$/i,
           exclude: /node_modules/,
           loaders: ['url', 'image-webpack?bypassOnDebug']
-        }
+        },
+        { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]' },
+        { test: /\.(ttf|eot)$/, loader: 'file?name=fonts/[name].[ext]' }
       ]
     }
   });

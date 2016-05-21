@@ -1,0 +1,9 @@
+html {
+  font-size:$font-size-base;
+}
+
+a {
+  @include font(lato, light);
+  @include transition(background-color 200ms ease);
+  cursor:pointer;
+}

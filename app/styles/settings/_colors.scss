@@ -1,14 +1,28 @@
-$colors: (
-  white: #fff,
-  black: #000,
-  grey: (
-    light: #eee,
-    medium: #aaa,
-    dark: #666
+$colors:(
+  white:#fff,
+  black:#000,
+  green:(
+    bright:#7cc24d,
+    soft:#bee0a6
   ),
-  red: (
-    light: #e24f54,
-    medium: #b23236,
-    dark: #83171a
+  blue:(
+    bright:#08c0de,
+    soft:#8dd0ea,
+    grey:#8da3b5
+  ),
+  red:(
+    bright:#ef3d4e,
+    soft:#e99e8a,
+    softer:#e5a590
+  ),
+  orange:(
+    bright:#e4a52a,
+    soft:#e3b459,
+    dark:#d0986c
+  ),
+  grey:(
+    dark:#656868,
+    medium:#ccc,
+    light:#eff0f0
   )
 );

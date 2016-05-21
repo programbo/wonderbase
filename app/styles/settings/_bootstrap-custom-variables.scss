@@ -1,5 +1,31 @@
-// Defaults are here - https: //github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+@import '../mixins/colors';
+@import '../mixins/fonts';
 
-$font-family-sans-serif: font-stack(lato, light);
+// https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
 
-$font-size-base: 16px;
+$font-family-sans-serif:font-stack(lato, light);
+$font-size-base:16px;
+
+$link-hover-decoration:none;
+
+$text-color:color(grey, dark);
+
+$headings-font-family:font-stack(lato, normal);
+$headings-line-height:1.2;
+
+$navbar-default-bg:color(green, bright);
+$navbar-default-border:transparent;
+$navbar-default-link-color:color(white);
+$navbar-default-link-hover-color:color(white);
+$navbar-default-brand-color:transparent;
+$navbar-default-toggle-icon-bar-bg:color(white);
+$navbar-default-toggle-border-color:transparent;
+$navbar-default-toggle-hover-bg:transparent;
+$navbar-border-radius:0;
+
+$list-group-bg:transparent;
+$list-group-border:color(green, soft);
+$list-group-border-radius:0;
+$list-group-hover-bg:darken(color(green, bright), 5%);
+$list-group-link-color:color(white);
+$list-group-link-hover-color:color(white);

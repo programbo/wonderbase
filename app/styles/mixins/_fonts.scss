@@ -1,3 +1,50 @@
+@import '../settings/fonts';
+$font-size-base: 16px;
+
+
+/// Strip Unit
+/// Removes the unit (e.g. px, em, rem) from a value, returning the number only.
+///
+/// @param {number} $num - Number to strip unit from.
+///
+/// @return The same number, sans unit.
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+/// Convert to Rem
+/// Converts a pixel value to matching rem value. *Any* value passed, regardless of unit, is assumed to be a pixel value. By default, the base pixel value used to calculate the rem value is taken from the `$rem-base` variable.
+///
+/// @param {number} $value - Pixel value to convert.
+///
+/// @return A number in rems, calculated based on the given value and the base pixel value.
+@function convert-to-rem($value, $base-value: $font-size-base) {
+  $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+  @if ($value == 0) { $value: 0; } // Turn 0rem into 0
+  @return $value;
+}
+
+/// Rem Calculator
+/// Converts one or more pixel values into matching rem values. This function works a lot like `convert-to-rem`, except it can convert more than one value at once, which is useful when setting multiple values on a `margin` or `padding` property.
+///
+/// @param {number|list} $values - One or more values to convert. Be sure to separate them with spaces and not commas. If you need to convert a comma-separated list, wrap the list in parentheses.
+///
+/// @return A list of converted values.
+@function rem-calc($values, $base-value: $font-size-base) {
+  @if $base-value == null {
+    $base-value: $font-size-base;
+  }
+  $max: length($values);
+
+  @if $max == 1 { @return convert-to-rem(nth($values, 1), $base-value); }
+
+  $remvalues: ();
+  @for $i from 1 through $max {
+    $remvalues: append($remvalues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remvalues;
+}
+
 // Loop through $fonts map from settings/config
 // and generate font styling for custom web fonts.
 // e.g. @include font(open-sans, semibold);
@@ -10,7 +57,6 @@
     $font: map-get(map-get($fonts-map, $name), $weight);
     $font-family: map-get($font, family);
     $font-weight: map-get($font, weight);
-    $font-style: map-get($font, style);
     $font-fallback: map-get(map-get($fonts-map, $name), fallback);
     @if $font-fallback {
       font-family: $font-family, $font-fallback;
@@ -19,7 +65,6 @@
       font-family: $font-family;
     }
     font-weight: $font-weight;
-    font-style: $font-style;
   }
   @else {
     @error 'Font name is incorrect. Check $fonts-map map and font() @include for errors.';
@@ -40,42 +85,9 @@
   @content;
 }
 
-// Fluid font-sizing with a min/max viewport width and font-size
-//
-// Source: http: //madebymike.com.au/writing/fluid-type-calc-examples
-//
-// @param {string} $min-vw Minimum viewport size
-// @param {string} $max-vw Maximum viewport size
-// @param {string} $min-font-size Minimum font size to scale from
-// @param {string} $max-font-size Maximum font size to scale to
-@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
-  $min-vw: map-get($breakpoints, $min-vw);
-  $max-vw: map-get($breakpoints, $max-vw);
-  @if $min-vw == null or $max-vw == null {
-    @error 'Breakpoint does not exist. Please use an existing breakpoint.';
-  }
-  $u1: unit($min-vw);
-  $u2: unit($max-vw);
-  $u3: unit($min-font-size);
-  $u4: unit($max-font-size);
-  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
-    @include font-size($min-font-size);
-    @media screen and (min-width: $min-vw) {
-      font-size: calc(#{$min-font-size} + #{strip-units($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-    }
-    @media screen and (min-width: $max-vw) {
-      @include font-size($max-font-size);
-    }
-    @content;
-  }
-  @else {
-    @error 'Detected mixed units. Please use the same units for all parameters.';
-  }
-}
-
 @function font-stack($font-family, $font-weight) {
   $font: map-get(map-get(map-get($fonts, $font-family), $font-weight), family);
   $font-fallback: map-get(map-get($fonts, $font-family), fallback);
-  $font-stack: prepend($font-fallback, $font);
+  $font-stack: join($font, $font-fallback);
   @return $font-stack;
 }
