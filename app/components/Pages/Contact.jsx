@@ -53,7 +53,7 @@ const Contact = ({ route, successful }) => (
           <dt>Phone:</dt>
           <dd>(08) 4321 1234</dd>
           <dt>Email:</dt>
-          <dd><Mailto>hello@meerkats.com.au</Mailto></dd>
+          <dd><Mailto>hello@XXX</Mailto></dd>
         </dl>
       </div>
       <ContactForm onSubmit={onSubmit} validate={validate}/>
