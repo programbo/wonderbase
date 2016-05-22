@@ -12,12 +12,12 @@ $lg:$screen-lg;
 @mixin container {
   @include container-fixed;
   @include breakpoint($sm) {
-    width:$container-sm;
+    width: $container-sm;
   }
   @include breakpoint($md) {
-    width:$container-md;
+    width: $container-md;
   }
   @include breakpoint($lg) {
-    width:$container-lg;
+    width: $container-lg;
   }
 }
