@@ -39,7 +39,18 @@ const common = {
       'node_modules'
     ]
   },
-  module: {},
+  module: {
+    loaders: [
+      {
+        test: /\.(woff2?|svg)$/,
+        loader: 'url?limit=10000&name=fonts/[name].[ext]'
+      },
+      {
+        test: /\.(ttf|eot)$/,
+        loader: 'file?name=fonts/[name].[ext]'
+      }
+    ]
+  },
   sasslint: {
     configFile: path.join(__dirname, '.scss-lint.yml')
   },
@@ -95,9 +106,7 @@ if (TARGET.match(/(start|build)$/)) {
             'url?limit=10000&name=images/[name].[ext]',
             'image-webpack?optimizationLevel=7&interlaced=false'
           ]
-        },
-        { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]' },
-        { test: /\.(ttf|eot)$/, loader: 'file?name=fonts/[name].[ext]' }
+        }
       ]
     }
   });
@@ -136,9 +145,7 @@ if (TARGET.match(/dev$/)) {
           test: /\.(jpe?g|png|gif|svg)$/i,
           exclude: /(apple-touch.*\.png)$/i,
           loaders: ['url', 'image-webpack?bypassOnDebug']
-        },
-        { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]' },
-        { test: /\.(ttf|eot)$/, loader: 'file?name=fonts/[name].[ext]' }
+        }
       ]
     }
   });
