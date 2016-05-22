@@ -1,27 +1,23 @@
 .main-menu-wrapper {
+  @include size(100%, 40px);
   top: 0;
   left: 0;
-  width: 100%;
-  height: 42px;
   background-color: color(white);
   @include breakpoint($sm) {
     position: absolute;
   }
 }
 .main-menu {
+  @include size(230px, 100%);
+  @include transition(transform 300ms ease);
   position: absolute;
   z-index: 3;
-  width: 230px;
-  height: 100%;
   padding: 35px 20px;
   background-color: color(white);
-  transition: transform 300ms ease;
   transform: translateX(-100%);
   @include breakpoint($sm) {
-    // @include grid-row();
+    @include size(100%, auto);
     position: relative;
-    width: 100%;
-    height: auto;
     margin: 0 auto;
     padding: 0;
     transform: translateX(0);
@@ -34,12 +30,6 @@
       background-position: 10px center;
       color: color(white);
       fill: color(white);
-      span {
-        display: none;
-        @include breakpoint($sm) {
-          display: block;
-        }
-      }
     }
   }
   &:before {
@@ -54,6 +44,7 @@
     }
   }
   .menu-toggle-button {
+    @include transition(padding-left 300ms ease, background-position 300ms ease, color 300ms ease, fill 300ms ease);
     position: absolute;
     top: 14px;
     right: 0;
@@ -62,11 +53,7 @@
     cursor: pointer;
     line-height: 15px;
     text-transform: uppercase;
-    transition: padding-left 300ms ease, background-position 300ms ease, color 300ms ease, fill 300ms ease;
     transform: translateX(100%);
-    @include breakpoint($sm) {
-      display: none;
-    }
     .icon {
       float: left;
       height: 15px;
@@ -101,14 +88,5 @@
     .menu-item--active {
       @include font(lato, bold);
     }
-  }
-}
-.menu-item {
-  &:hover {
-    color: color(red, medium);
-  }
-  &.menu-item--active {
-    color: color(black);
-    cursor: default;
   }
 }
